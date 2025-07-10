@@ -12,7 +12,7 @@
     "@blueking/user-selector": "^1.0.7",
     "bk-magic-vue": "^2.4.14",
     "bkci-atom-components": "1.0.0",
-    "axios": "^0.16.2",
+    "axios": "^0.30.0",
     "js-cookie": "^3.0.1",
     "vee-validate": "^2.0.3",
     "vue": "^2.6.14",

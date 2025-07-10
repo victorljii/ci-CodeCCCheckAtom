@@ -3,21 +3,24 @@ export function urlJoin(...args) {
     .replace(/([^:]\/)\/+/g, '$1');
 }
 
-export function getQueryParams(urlStr) {
-  let url = '';
-  if (typeof urlStr === 'undefined') {
-    url = decodeURI(location.search);
-  } else {
-    url = `?${urlStr.split('?')[1]}`;
+export function getQueryParams(urlStr = window.location.href) {
+  let search = '';
+  try {
+    // 优先用 URL API 解析
+    const url = new URL(urlStr, window.location.origin);
+    search = url.search;
+  } catch (e) {
+    // fallback: 兼容非标准 URL 字符串
+    const idx = urlStr.indexOf('?');
+    search = idx !== -1 ? urlStr.slice(idx) : '';
   }
-  const queryObj = {};
-  if (url.indexOf('?') !== -1) {
-    const str = url.substr(1);
-    const strs = str.split('&');
-    for (let i = 0; i < strs.length; i++) {
-      queryObj[strs[i].split('=')[0]] = decodeURI(strs[i].split('=')[1]);
+  const params = {};
+  if (search) {
+    const usp = new URLSearchParams(search);
+    for (const [key, value] of usp.entries()) {
+      params[key] = value;
     }
   }
-  return queryObj;
+  return params;
 }
 
