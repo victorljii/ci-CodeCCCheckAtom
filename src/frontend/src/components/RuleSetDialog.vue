@@ -502,7 +502,7 @@
             .checkerset-main {
                 display: flex;
                 align-items: center;
-                line-height: 14px;
+                line-height: 16px;
             }
             .info-content {
                 padding: 24px 0 20px;
